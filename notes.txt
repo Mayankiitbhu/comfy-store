@@ -1,0 +1,145 @@
+-------------------------------REACT ROUTER-------------------------------
+
+You render your app:
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root")
+);
+root.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<Home />} />
+        <Route path="teams" element={<Teams />}>
+          <Route path=":teamId" element={<Team />} />
+          <Route path="new" element={<NewTeamForm />} />
+          <Route index element={<LeagueStandings />} />
+        </Route>
+      </Route>
+      <Route element={<PageLayout />}>
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/tos" element={<Tos />} />
+      </Route>
+      <Route path="contact-us" element={<Contact />} />
+    </Routes>
+  </BrowserRouter>
+);
+<BrowserRouter> creates a history, puts the initial location in to state, and subscribes to the URL.
+
+<Routes> recurses its child routes to build a route config, matches those routes against the location, creates some route matches, and renders the first match's route element.
+
+You render an <Outlet/> in each parent route.
+
+The outlets render the next match in the route matches.
+
+The user clicks a link
+
+The link calls navigate()
+
+The history changes the URL and notifies <BrowserRouter>.
+
+<BrowserRouter> rerenders, start over at (2)!
+
+
+
+-------------------------STYLED-COMPONENTS--------------------------------
+- [Styled Components Docs](https://styled-components.com/)
+
+import styled from 'styled-components';
+
+const El = styled.el`
+  // styles go here
+
+- element can be any html element (div,button,section, etc)
+
+- no name collisions, since unique class
+- vscode-styled-components extension
+- style entire react component
+
+
+```js
+const Wrapper = styled.el``;
+
+const Component = () => {
+  return (
+    <Wrapper>
+      <h1> Component</h1>
+    </Wrapper>
+  );
+};
+```
+
+const Wrapper = styled.main`
+
+  nav {
+    display : flex;
+    align-items : center;
+    margin : 0 auto;
+    height : var(--nav-height);
+    width : var(--fluid-width);
+    max-width : var(--max-width);
+  },
+  h1 { 
+    font-weight : 700;
+    span {              ------------->> styling nested elements
+      color : var(--primary-500)
+    }
+  },
+  .page {
+    display : grid;
+    align-items : center;
+    min-height : calc(100vh - var(--nav-height))
+  },
+
+  p { 
+    color : var(--grey-600);
+  },
+
+  .main-img {
+    display : none;
+  }
+
+  @media (min-width:992px) {
+    .page { 
+      grid-template-columns : 1fr 1fr;
+      column-gap : 3rem;
+    }
+    .main-img {
+      display : block;
+    }
+  }
+
+
+`;
+
+
+------------------------------------------------------------------------
+
+
+- [Cool Images](https://undraw.co/)
+
+-----------------------------------------------------------------------
+
+Passing parameter along with event:
+<button 
+   onClick={(e) => {
+      this.clickMe(e, someParameter);
+   }}
+>
+Click Me!
+</button>
+
+----------------------------------------------------------------------
+React Toastify : 
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; --> toast doesnt show if you dont import styles
+
+
+<ToastContainer position='top-center' />
+
+
+In Other class: 
+
+import { toast } from 'react-toastify';
+toast.warn('Please fill all the fields');
