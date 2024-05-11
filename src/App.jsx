@@ -11,7 +11,7 @@ import {
   Checkout,
   Orders,
 } from './pages';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
 import { ErrorElement } from './components';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -25,7 +25,7 @@ import { store } from './store';
 
 function App() {
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path : "/",
       element : <HomeLayout />,
